@@ -1,4 +1,5 @@
-import './index.css'
+import './index.css';
+import Projecten from './Projecten';
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <p>Ik hou van leren, creatief zijn en het bouwen van leuke kleine projecten. Elke paar dagen voeg ik een nieuw project toe!</p>
       <p>Deze website is mijn persoonlijke portfolio waar je al mijn werk kunt bekijken 😊</p>
       <a href="https://github.com/mahtabmardani88" target="_blank">Bekijk mijn GitHub</a>
+      <Projecten/>
     </div>
   )
 }

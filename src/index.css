@@ -1,7 +1,7 @@
 body {
-  font-family: sans-serif;
+  font-family: 'Segoe UI', sans-serif;
   background-color: #f9f9f9;
-  color: #333;
+  color: #1f2937;
   margin: 0;
   padding: 0;
 }
@@ -10,14 +10,13 @@ body {
   max-width: 800px;
   margin: 50px auto;
   padding: 20px;
-  background: white;
+  background-color: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-h1 {
-  font-size: 2.5rem;
-  color: #222;
+h1, h2, h3 {
+  color: #1e3a8a;
 }
 
 p {
@@ -27,12 +26,41 @@ p {
 }
 
 a {
-  display: inline-block;
-  margin-top: 1rem;
-  color: #0077cc;
+  color: #2563eb;
   text-decoration: none;
+  font-weight: 500;
 }
 
 a:hover {
+  color: #1d4ed8;
   text-decoration: underline;
+}
+.projecten-container {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.projecten-lijst {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.project-kaart {
+  width: 300px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+
+.project-kaart img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
