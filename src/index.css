@@ -173,3 +173,33 @@ a:hover {
   font-size: 0.9rem;
   color: #6b7280;
 }
+.logo {
+  height: 70px;
+  margin-bottom: 1rem;
+  display: block;
+}
+.logo {
+  display: block;
+  margin: 0 auto 1rem auto;
+}
+.aboutme-container {
+  max-width: 800px;
+  margin: 4rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  color: #1f2937;
+}
+
+.aboutme-container h2 {
+  color: #1e3a8a;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.aboutme-container p {
+  margin-bottom: 1.2rem;
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
