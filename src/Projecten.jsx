@@ -1,62 +1,87 @@
-const persoonlijkeProjecten = [
-    {
-        naam: "...",
-        beschrijving: "..",
-        organisatie: ".",
-        github: ".",
-        demo: ".",
-        technologieen: ["React", "Node.js", "MongoDB"],
-        afbeelding: ".",
-      },
-   
-  ];
-  
-  const groepsProjecten = [
-    {
-        naam: "Quiz App",
-        beschrijving: "Een interactieve quiz gebouwd met JavaScript.",
-        github: "https://github.com/mahtabmardani88/...",
-        demo: "https://voorbeeld.com/quiz",
-        technologieen: ["JavaScript", "HTML", "CSS"],
-        afbeelding: "https://via.placeholder.com/300x180?text=Quiz+App",
-      },
-    {
-        naam: "Quiz App",
-        beschrijving: "Een interactieve quiz gebouwd met JavaScript.",
-        github: "https://github.com/mahtabmardani88/...",
-        demo: "https://voorbeeld.com/quiz",
-        technologieen: ["JavaScript", "HTML", "CSS"],
-        afbeelding: "https://via.placeholder.com/300x180?text=Quiz+App",
-      },
-  ];
+// 📁 src/Projecten.jsx
+import { useState } from "react";
+import { resolveImagePath } from "./components/ProjectImages";
+import ProjectForm from "./components/ProjectForm";
 
+function ProjectKaart({ project }) {
+  const [toonAlles, setToonAlles] = useState(false);
 
-  function ProjectKaart({ project }) {
-    return (
-      <div className="project-kaart">
-        <img src={project.afbeelding} alt={project.naam} />
+  const maxToon = 2;
+  const afbeeldingen = Array.isArray(project.afbeelding)
+    ? (toonAlles ? project.afbeelding : project.afbeelding.slice(0, maxToon))
+    : [project.afbeelding];
+
+  const resolvedImages = afbeeldingen.map(file =>
+    typeof file === "string" ? resolveImagePath(file.split("/").pop()) : file
+  );
+
+  return (
+    <div className="project-kaart">
+      <div className="project-images">
+        {resolvedImages.map((img, i) => (
+          <img key={i} src={img} alt={`${project.naam} ${i + 1}`} />
+        ))}
+
+        {Array.isArray(project.afbeelding) && project.afbeelding.length > maxToon && (
+          <button
+            onClick={() => setToonAlles(!toonAlles)}
+            className="toon-meer-btn"
+          >
+            {toonAlles ? "Minder tonen ▲" : "Meer tonen ▼"}
+          </button>
+        )}
+      </div>
+      <div>
         <h3>{project.naam}</h3>
         <p>{project.beschrijving}</p>
         {project.organisatie && <p><strong>Organisatie:</strong> {project.organisatie}</p>}
         <p><strong>Talen:</strong> {project.technologieen.join(", ")}</p>
-        <a href={project.github} target="_blank">GitHub</a> |{" "}
-        <a href={project.demo} target="_blank">Live Demo</a>
+        <div className="project-links">
+          {project.github
+            ? <a href={project.github} target="_blank">GitHub</a>
+            : <span style={{ fontStyle: "italic", color: "#9ca3af" }}>
+                Privé GitHub-repository (niet openbaar)
+              </span>}
+          {" "}
+          <a href={project.demo} target="_blank">Live Demo</a>
+        </div>
       </div>
-    );
-  }
-  
-  export default function Projecten() {
-    return (
-      <section className="projecten-container">
-        <h2>📌 Persoonlijke Projecten</h2>
-        <div className="projecten-lijst">
-          {persoonlijkeProjecten.map((p, i) => <ProjectKaart key={i} project={p} />)}
+    </div>
+  );
+}
+
+export default function Projecten({ projecten = [], onAddProject }) {
+  const [toonFormulier, setToonFormulier] = useState(false);
+  const persoonlijke = projecten.filter(p => !p.organisatie);
+  const groeps = projecten.filter(p => p.organisatie);
+
+  return (
+    <section className="projecten-container">
+      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+        <button
+          onClick={() => setToonFormulier(!toonFormulier)}
+          className="toon-formulier-knop"
+          style={{ padding: '0.5rem 1rem', fontSize: '1rem', cursor: 'pointer' }}
+        >
+          {toonFormulier ? "✖ Sluit formulier" : "➕ Voeg een nieuw project toe"}
+        </button>
+      </div>
+
+      {toonFormulier && (
+        <div className="project-form-wrapper" style={{ marginBottom: '2rem' }}>
+          <ProjectForm onAdd={onAddProject} />
         </div>
-  
-        <h2 style={{ marginTop: '3rem' }}>👥 Groepsprojecten</h2>
-        <div className="projecten-lijst">
-          {groepsProjecten.map((p, i) => <ProjectKaart key={i} project={p} />)}
-        </div>
-      </section>
-    );
-  }
+      )}
+
+      <h2 style={{ marginTop: '2rem' }}>👥 Groepsprojecten</h2>
+      <div className="projecten-lijst">
+        {groeps.map((p, i) => <ProjectKaart key={i} project={p} />)}
+      </div>
+
+      <h2 style={{ marginTop: '3rem' }}>📌 Persoonlijke Projecten</h2>
+      <div className="projecten-lijst">
+        {persoonlijke.map((p, i) => <ProjectKaart key={i} project={p} />)}
+      </div>
+    </section>
+  );
+}

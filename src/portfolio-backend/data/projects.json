@@ -1,0 +1,54 @@
+[
+    {
+      "naam": "Countries Info API",
+      "beschrijving": "Een eenvoudige JavaScript-app waarmee je informatie over landen kunt opzoeken met behulp van een externe API. Je kunt zoeken op naam, suggesties krijgen en info zoals hoofdstad, bevolking en locatie bekijken.",
+      "organisatie": "HackYourFuture",
+      "github": "https://github.com/mahtabmardani88/Countries-Info-Api",
+      "demo": "https://mahtab-countries.netlify.app",
+      "technologieen": [
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "REST API"
+      ],
+      "afbeelding": [
+        "/src/assets/image/countries-api.png"
+      ]
+    },
+    {
+      "naam": "Quiz App – Adventure Time",
+      "beschrijving": "Een quizapplicatie gebouwd met JavaScript waarin je vragen beantwoordt en aan het eind een score krijgt. Gebouwd in teamverband tijdens HackYourFuture onder begeleiding van mentor Kerem.",
+      "organisatie": "HackYourFuture – Team Adventure Time",
+      "github": "",
+      "demo": "https://keremilhan.github.io/quiz-app/",
+      "technologieen": [
+        "JavaScript",
+        "HTML",
+        "CSS"
+      ],
+      "afbeelding": [
+        "/src/assets/image/quiz-app-1.png",
+        "/src/assets/image/quiz-app-2.png"
+      ]
+    },
+    {
+      "naam": "Book Café Webapp",
+      "beschrijving": "Een full-stack groepsproject bij HackYourFuture waarin gebruikers boeken kunnen zoeken, reserveren en reviews plaatsen. Ik heb zowel aan frontend als backend gewerkt.",
+      "organisatie": "HackYourFuture – Team Project B",
+      "github": "",
+      "demo": "https://c48-group-b-65d4744c77ac.herokuapp.com/",
+      "technologieen": [
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "React",
+        "Scrum"
+      ],
+      "afbeelding": [
+        "/src/assets/image/bc-1.png",
+        "/src/assets/image/bc-2.png",
+        "/src/assets/image/bc-3.png",
+        "/src/assets/image/bc-4.png"
+      ]
+    }
+  ]

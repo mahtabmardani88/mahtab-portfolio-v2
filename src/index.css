@@ -49,21 +49,50 @@ a:hover {
 }
 
 .project-kaart {
-  width: 300px;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  padding: 1rem;
-  background-color: #ffffff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  text-align: center;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  background-color: #f9fafb;
+  padding: 1.2rem;
+  margin-bottom: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
 }
-
 
 .project-kaart img {
-  width: 100%;
+  width: 220px;
   height: auto;
   border-radius: 8px;
+  object-fit: cover;
 }
+.project-kaart h3 {
+  margin-top: 0;
+  font-size: 1.3rem;
+  color: #1f2937;
+}
+.project-kaart p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0.5rem 0;
+  color: #4b5563;
+}
+
+.project-kaart .project-links {
+  margin-top: 0.8rem;
+}
+
+.project-kaart .project-links a {
+  margin-right: 1rem;
+  text-decoration: none;
+  color: #2563eb;
+  font-weight: 500;
+}
+
+.project-kaart .project-links a:hover {
+  text-decoration: underline;
+}
+
+
 .contact-container {
   max-width: 800px;
   margin: 4rem auto;
@@ -202,4 +231,30 @@ a:hover {
   margin-bottom: 1.2rem;
   line-height: 1.6;
   font-size: 1.05rem;
+}
+
+.project-images {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.project-images img {
+  width: 220px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.toon-meer-btn {
+  margin-top: 0.5rem;
+  padding: 6px 12px;
+  background-color: #e0e7ff;
+  color: #1e3a8a;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.toon-meer-btn:hover {
+  background-color: #c7d2fe;
 }
