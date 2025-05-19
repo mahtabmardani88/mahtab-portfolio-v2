@@ -21,7 +21,7 @@ const pool = new Pool({
   ssl: { rejectUnauthorized: false }
 });
 
-app.use(cors());
+app.use(cors("https://lively-kataifi-0399ae.netlify.app/"));
 app.use(express.json());
 
 // CREATE TABLE اگر وجود نداشت
