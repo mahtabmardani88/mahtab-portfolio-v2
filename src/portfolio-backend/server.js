@@ -1,6 +1,6 @@
-// ✅ نسخه PostgreSQL شده‌ی server.js با استفاده از pg
 import dotenv from "dotenv";
 dotenv.config();
+import process from 'process';
 import express from "express";
 import cors from "cors";
 import { nanoid } from "nanoid";
@@ -11,7 +11,6 @@ const { Pool } = pkg;
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// استفاده از Environment Variables برای اتصال به دیتابیس
 const pool = new Pool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -21,10 +20,12 @@ const pool = new Pool({
   ssl: { rejectUnauthorized: false }
 });
 
-app.use(cors("https://lively-kataifi-0399ae.netlify.app/"));
+app.use(cors({
+  origin: "https://lively-kataifi-0399ae.netlify.app"
+}));
+
 app.use(express.json());
 
-// CREATE TABLE اگر وجود نداشت
 const initDb = async () => {
   await pool.query(`
     CREATE TABLE IF NOT EXISTS projects (
