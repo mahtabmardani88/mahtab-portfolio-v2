@@ -9,7 +9,8 @@ export default function ProjectForm({ onAdd }) {
     github: "",
     demo: "",
     technologieen: "",
-    afbeelding: ""
+    afbeelding: "" ,
+    type: ""
   });
 
   const handleChange = (e) => {
@@ -44,8 +45,14 @@ export default function ProjectForm({ onAdd }) {
       <input name="github" value={formData.github} onChange={handleChange} placeholder="GitHub link" />
       <input name="demo" value={formData.demo} onChange={handleChange} placeholder="Live demo link" />
       <input name="technologieen" value={formData.technologieen} onChange={handleChange} placeholder="Talen (gescheiden door komma's)" />
+      <select name="type" value={formData.type} onChange={handleChange} required>
+  <option value="">Selecteer type</option>
+  <option value="persoonlijk">Persoonlijk project</option>
+  <option value="groeps">Groepsproject</option>
+</select>
       <input name="afbeelding" value={formData.afbeelding} onChange={handleChange} placeholder="Afbeelding URL of bestandsnaam" />
       <button type="submit">Project toevoegen</button>
+      
     </form>
   );
 }
