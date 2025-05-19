@@ -9,7 +9,7 @@ import pkg from 'pg';
 const { Pool } = pkg;
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 const pool = new Pool({
   host: process.env.DB_HOST,
@@ -61,6 +61,13 @@ app.post("/projects", async (req, res) => {
   );
   res.status(201).json(newProject);
 });
+
+app.delete("/projects/:id", async (req, res) => {
+  const { id } = req.params;
+  await pool.query("DELETE FROM projects WHERE id = $1", [id]);
+  res.status(204).send();
+});
+
 
 // Start Server
 app.listen(PORT, async () => {

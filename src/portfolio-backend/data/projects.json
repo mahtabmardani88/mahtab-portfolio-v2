@@ -1,6 +1,7 @@
 [
     {
       "naam": "Countries Info API",
+      "type": "persoonlijk",
       "beschrijving": "Een eenvoudige JavaScript-app waarmee je informatie over landen kunt opzoeken met behulp van een externe API. Je kunt zoeken op naam, suggesties krijgen en info zoals hoofdstad, bevolking en locatie bekijken.",
       "organisatie": "HackYourFuture",
       "github": "https://github.com/mahtabmardani88/Countries-Info-Api",
@@ -17,6 +18,7 @@
     },
     {
       "naam": "Quiz App – Adventure Time",
+      "type": "groeps",
       "beschrijving": "Een quizapplicatie gebouwd met JavaScript waarin je vragen beantwoordt en aan het eind een score krijgt. Gebouwd in teamverband tijdens HackYourFuture onder begeleiding van mentor Kerem.",
       "organisatie": "HackYourFuture – Team Adventure Time",
       "github": "",
@@ -33,6 +35,7 @@
     },
     {
       "naam": "Book Café Webapp",
+      "type": "groeps",
       "beschrijving": "Een full-stack groepsproject bij HackYourFuture waarin gebruikers boeken kunnen zoeken, reserveren en reviews plaatsen. Ik heb zowel aan frontend als backend gewerkt.",
       "organisatie": "HackYourFuture – Team Project B",
       "github": "",

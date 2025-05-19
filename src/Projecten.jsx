@@ -52,8 +52,8 @@ function ProjectKaart({ project }) {
 
 export default function Projecten({ projecten = [], onAddProject }) {
   const [toonFormulier, setToonFormulier] = useState(false);
-  const persoonlijke = projecten.filter(p => !p.organisatie);
-  const groeps = projecten.filter(p => p.organisatie);
+ const persoonlijke = projecten.filter(p => p.type === "persoonlijk");
+const groeps = projecten.filter(p => p.type === "groeps");
 
   return (
     <section className="projecten-container">
