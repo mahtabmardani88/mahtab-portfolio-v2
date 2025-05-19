@@ -24,7 +24,7 @@ export default function ProjectForm({ onAdd }) {
       technologieen: formData.technologieen.split(",").map(t => t.trim())
     };
 
-    const res = await fetch("http://localhost:3001/projects", {
+    const res = await fetch("https://mahtab-portfolio-v2.onrender.com/projects", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)

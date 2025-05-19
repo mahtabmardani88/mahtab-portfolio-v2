@@ -13,7 +13,7 @@ function App() {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3001/projects")
+    fetch("https://mahtab-portfolio-v2.onrender.com/projects")
       .then(res => res.json())
       .then(data => setProjects(data));
   }, []);
