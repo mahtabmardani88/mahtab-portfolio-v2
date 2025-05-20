@@ -2,6 +2,9 @@
 import { useState } from "react";
 import { resolveImagePath } from "./components/ProjectImages";
 import ProjectForm from "./components/ProjectForm";
+import { Link } from 'react-router-dom';
+import Modal from "./components/Modal";
+
 
 function ProjectKaart({ project }) {
   const [toonAlles, setToonAlles] = useState(false);
@@ -56,26 +59,12 @@ function ProjectKaart({ project }) {
 
 export default function Projecten({ projecten = [], onAddProject }) {
   const [toonFormulier, setToonFormulier] = useState(false);
+
   const persoonlijke = projecten.filter(p => p.type === "persoonlijk");
   const groeps = projecten.filter(p => p.type === "groeps");
 
-  return (
+   return (
     <section className="projecten-container">
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <button
-          onClick={() => setToonFormulier(!toonFormulier)}
-          className="toon-formulier-knop"
-          style={{ padding: '0.5rem 1rem', fontSize: '1rem', cursor: 'pointer' }}
-        >
-          {toonFormulier ? "✖ Sluit formulier" : "➕ Voeg een nieuw project toe"}
-        </button>
-      </div>
-
-      {toonFormulier && (
-        <div className="project-form-wrapper" style={{ marginBottom: '2rem' }}>
-          <ProjectForm onAdd={onAddProject} />
-        </div>
-      )}
 
       <h2 style={{ marginTop: '2rem' }}>👥 Groepsprojecten</h2>
       <div className="projecten-lijst">
@@ -86,6 +75,39 @@ export default function Projecten({ projecten = [], onAddProject }) {
       <div className="projecten-lijst">
         {persoonlijke.map((p, i) => <ProjectKaart key={i} project={p} />)}
       </div>
+
+      {/* دکمه ➕ باز کردن فرم در پاپ‌آپ */}
+      <div
+        onClick={() => setToonFormulier(true)}
+        style={{
+          position: "fixed",
+          bottom: "20px",
+          right: "20px",
+          backgroundColor: "#2563eb",
+          color: "white",
+          borderRadius: "50%",
+          width: "50px",
+          height: "50px",
+          fontSize: "2rem",
+          textAlign: "center",
+          lineHeight: "50px",
+          cursor: "pointer",
+          boxShadow: "0px 2px 10px rgba(0,0,0,0.2)"
+        }}
+        title="Nieuw project toevoegen"
+      >
+        +
+      </div>
+
+      {/* پاپ‌آپ فرم */}
+      <Modal isOpen={toonFormulier} onClose={() => setToonFormulier(false)}>
+        <ProjectForm
+          onAdd={(newProj) => {
+            onAddProject(newProj);
+            setToonFormulier(false); // بستن بعد از ذخیره
+          }}
+        />
+      </Modal>
     </section>
   );
 }

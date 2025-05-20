@@ -6,6 +6,7 @@ import bc2 from "../assets/image/bc-2.png";
 import bc3 from "../assets/image/bc-3.png";
 import bc4 from "../assets/image/bc-4.png";
 
+
 const imageMap = {
   "countries-api.png": countriesInfoImage,
   "quiz-app-1.png": quizApp1,

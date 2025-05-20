@@ -1,28 +1,21 @@
+/* ===== پایه ===== */
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #f9f9f9;
   color: #1f2937;
   margin: 0;
   padding: 0;
 }
 
-.container {
-  max-width: 800px;
-  margin: 50px auto;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-}
-
 h1, h2, h3 {
   color: #1e3a8a;
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
 
 p {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   line-height: 1.6;
-  margin-top: 1rem;
+  margin: 0 0 1.2rem;
 }
 
 a {
@@ -35,28 +28,91 @@ a:hover {
   color: #1d4ed8;
   text-decoration: underline;
 }
-.projecten-container {
-  padding: 2rem;
+
+/* ===== محتوای مرکزی ===== */
+.container {
   max-width: 1000px;
-  margin: auto;
+  margin: 0 auto;
+  /* padding: 2rem; */
+}
+
+/* ===== هدر ===== */
+.main-header {
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+}
+
+.header-logo {
+  height: 10vh; 
+  object-fit: contain;
+  padding-left: 30px;
+}
+
+
+.header-right {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  padding-right: 30px;
+  color: #b9c0e8;
+}
+
+.header-right a {
+  font-size: 1rem;
+}
+
+/* ===== بخش درباره من ===== */
+.aboutme-container {
+  background-color: #ffffff;
+  padding: 2rem;
+
+}
+
+.aboutme-photos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+.aboutme-photo {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== کارت پروژه‌ها ===== */
+.projecten-container {
+  margin: 4rem auto;
+  max-width: 1000px;
+  padding: 0 2rem;
 }
 
 .projecten-lijst {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .project-kaart {
   display: flex;
-  align-items: flex-start;
+  flex-direction: row;
   gap: 1.5rem;
-  background-color: #f9fafb;
-  padding: 1.2rem;
-  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
 .project-kaart img {
@@ -65,48 +121,97 @@ a:hover {
   border-radius: 8px;
   object-fit: cover;
 }
+
 .project-kaart h3 {
-  margin-top: 0;
+  margin: 0;
   font-size: 1.3rem;
-  color: #1f2937;
 }
+
 .project-kaart p {
   font-size: 0.95rem;
   line-height: 1.5;
-  margin: 0.5rem 0;
   color: #4b5563;
 }
 
-.project-kaart .project-links {
+.project-links {
   margin-top: 0.8rem;
 }
 
-.project-kaart .project-links a {
+.project-links a {
   margin-right: 1rem;
-  text-decoration: none;
-  color: #2563eb;
   font-weight: 500;
 }
 
-.project-kaart .project-links a:hover {
-  text-decoration: underline;
+/* دکمه نمایش بیشتر تصاویر */
+.toon-meer-btn {
+  margin-top: 0.5rem;
+  padding: 6px 12px;
+  background-color: #e0e7ff;
+  color: #1e3a8a;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
 }
 
+.toon-meer-btn:hover {
+  background-color: #c7d2fe;
+}
 
+/* ===== فرم پروژه ===== */
+.project-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  font-size: 1rem;
+}
+
+.project-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.project-form input,
+.project-form select {
+  padding: 0.6rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-top: 0.3rem;
+}
+
+.project-form button {
+  padding: 0.75rem 1.2rem;
+  font-size: 1rem;
+  border: none;
+  background-color: #2563eb;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.project-form button:hover {
+  background-color: #1d4ed8;
+}
+
+/* ===== فرم تماس ===== */
 .contact-container {
-  max-width: 800px;
+  max-width: 900px;
   margin: 4rem auto;
-  padding: 2rem;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  padding: 2.5rem;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
 }
 
 .contact-title {
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
   text-align: center;
+  font-size: 2rem;
   color: #1e3a8a;
+  margin-bottom: 2rem;
 }
 
 .contact-form {
@@ -117,46 +222,13 @@ a:hover {
 
 .form-row {
   display: flex;
-  gap: 1.5rem;
   flex-wrap: wrap;
+  gap: 1.5rem;
 }
 
-.form-group {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group label {
-  margin-bottom: 0.4rem;
-  font-weight: 500;
-  color: #1f2937;
-}
-
-.form-group input,
-.form-group textarea {
-  padding: 0.8rem;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: border 0.2s ease;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  border-color: #2563eb;
-  outline: none;
-}
-
-.full-width {
-  width: 100%;
-}
-
-.button-row {
-  text-align: right;
-}
 
 .contact-button {
+  align-self: flex-end;
   padding: 0.8rem 1.5rem;
   background-color: #2563eb;
   color: white;
@@ -165,13 +237,14 @@ a:hover {
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  transition: background-color 0.2s ease;
 }
 
 .contact-button:hover {
   background-color: #1d4ed8;
-  transform: translateY(-2px);
 }
+
+/* ===== فوتر ===== */
 .footer {
   margin-top: 4rem;
   padding: 2rem;
@@ -180,10 +253,6 @@ a:hover {
   font-size: 0.95rem;
   color: #4b5563;
   border-top: 1px solid #e5e7eb;
-}
-
-.footer-links {
-  margin-top: 0.5rem;
 }
 
 .footer-links a {
@@ -201,60 +270,4 @@ a:hover {
   font-style: italic;
   font-size: 0.9rem;
   color: #6b7280;
-}
-.logo {
-  height: 70px;
-  margin-bottom: 1rem;
-  display: block;
-}
-.logo {
-  display: block;
-  margin: 0 auto 1rem auto;
-}
-.aboutme-container {
-  max-width: 800px;
-  margin: 4rem auto;
-  padding: 2rem;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-  color: #1f2937;
-}
-
-.aboutme-container h2 {
-  color: #1e3a8a;
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
-}
-
-.aboutme-container p {
-  margin-bottom: 1.2rem;
-  line-height: 1.6;
-  font-size: 1.05rem;
-}
-
-.project-images {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
-
-.project-images img {
-  width: 220px;
-  border-radius: 8px;
-  object-fit: cover;
-}
-.toon-meer-btn {
-  margin-top: 0.5rem;
-  padding: 6px 12px;
-  background-color: #e0e7ff;
-  color: #1e3a8a;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.9rem;
-}
-
-.toon-meer-btn:hover {
-  background-color: #c7d2fe;
 }
