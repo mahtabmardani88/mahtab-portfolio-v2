@@ -1,3 +1,4 @@
+
 import './index.css';
 import Projecten from './Projecten';
 import Contact from './Contact';
@@ -6,6 +7,7 @@ import logo from './assets/mahtab logo.png';
 import AboutMe from './AboutMe';
 import ProjectForm from "./components/ProjectForm";
 import { useEffect, useState } from "react";
+import data from "./portfolio-backend/data/projects.json";
 
 
 
@@ -34,7 +36,7 @@ function App() {
 
 
 
-        <Projecten projecten={projects} onAddProject={handleAddProject} />
+        <Projecten projecten={data} onAddProject={handleAddProject} />
 
         <Contact />
       </div>

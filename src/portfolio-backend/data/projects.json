@@ -53,5 +53,15 @@
         "/src/assets/image/bc-3.png",
         "/src/assets/image/bc-4.png"
       ]
-    }
+    },{
+  "naam": "Hotel Reservation System",
+  "type": "groeps",
+  "beschrijving": "Een groepsproject tijdens mijn traineeship bij Capgemini waarin we een hotelsysteem hebben gebouwd met Java en Spring Boot.",
+  "organisatie": "Capgemini",
+  "github": "https://github.com/mahtabmardani88/Hotel-reservations-Java",
+  "demo": "",
+  "technologieen": ["Java", "Spring Boot", "Thymeleaf", "MySQL"],
+  "afbeelding": []
+}
+
   ]

@@ -16,7 +16,6 @@ const imageMap = {
   "bc-4.png": bc4
 };
 
-// تابعی که رشته‌ها رو به تصویر تبدیل می‌کنه
 export function resolveImagePath(fileName) {
   return imageMap[fileName] || fileName;
 }

@@ -43,7 +43,11 @@ function ProjectKaart({ project }) {
                 Privé GitHub-repository (niet openbaar)
               </span>}
           {" "}
-          <a href={project.demo} target="_blank">Live Demo</a>
+          {project.demo
+            ? <a href={project.demo} target="_blank">Live Demo</a>
+            : <span style={{ fontStyle: "italic", color: "#9ca3af" }}>
+                Geen live demo beschikbaar
+              </span>}
         </div>
       </div>
     </div>
@@ -52,8 +56,8 @@ function ProjectKaart({ project }) {
 
 export default function Projecten({ projecten = [], onAddProject }) {
   const [toonFormulier, setToonFormulier] = useState(false);
- const persoonlijke = projecten.filter(p => p.type === "persoonlijk");
-const groeps = projecten.filter(p => p.type === "groeps");
+  const persoonlijke = projecten.filter(p => p.type === "persoonlijk");
+  const groeps = projecten.filter(p => p.type === "groeps");
 
   return (
     <section className="projecten-container">
