@@ -1,10 +1,11 @@
+// server.js
 import dotenv from "dotenv";
 dotenv.config();
-import process from 'process';
 import express from "express";
 import cors from "cors";
 import { nanoid } from "nanoid";
-import pkg from 'pg';
+import pkg from "pg";
+import process from 'process';
 
 const { Pool } = pkg;
 
@@ -20,15 +21,7 @@ const pool = new Pool({
   ssl: { rejectUnauthorized: false }
 });
 
-// app.use(cors({
-//   origin: [
-//     "https://lively-kataifi-0399ae.netlify.app",
-//     "http://localhost:5174"
-//   ]
-// }));
 app.use(cors());
-
-
 app.use(express.json());
 
 const initDb = async () => {
@@ -41,40 +34,74 @@ const initDb = async () => {
       github TEXT,
       demo TEXT,
       technologieen TEXT[],
-      afbeelding TEXT[]
+      afbeelding TEXT[],
+      type TEXT
     )
   `);
 };
 
-// GET /projects
+// GET همه پروژه‌ها
 app.get("/projects", async (req, res) => {
   const result = await pool.query("SELECT * FROM projects");
-  res.json(result.rows);
+
+  const complete = result.rows.map(p => ({
+    ...p,
+    type: p.type || "persoonlijk"  // اگر type وجود نداشت، پیش‌فرض بده
+  }));
+
+  res.json(complete);
 });
 
-// POST /projects
+// POST پروژه جدید
 app.post("/projects", async (req, res) => {
   const newProject = {
     id: nanoid(),
-    ...req.body
+    ...req.body,
+    type: req.body.type || "persoonlijk"
   };
-  const { id, naam, beschrijving, organisatie, github, demo, technologieen, afbeelding } = newProject;
+
+  const { id, naam, beschrijving, organisatie, github, demo, technologieen, afbeelding, type } = newProject;
+
   await pool.query(
-    `INSERT INTO projects (id, naam, beschrijving, organisatie, github, demo, technologieen, afbeelding)
-     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
-    [id, naam, beschrijving, organisatie, github, demo, technologieen, afbeelding]
+    `INSERT INTO projects (id, naam, beschrijving, organisatie, github, demo, technologieen, afbeelding, type)
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
+    [id, naam, beschrijving, organisatie, github, demo, technologieen, afbeelding, type]
   );
+
   res.status(201).json(newProject);
 });
 
+// PUT پروژه
+app.put("/projects/:id", async (req, res) => {
+  const { id } = req.params;
+  const { naam, beschrijving, organisatie, github, demo, technologieen, afbeelding, type } = req.body;
+
+  await pool.query(
+    `UPDATE projects SET
+      naam = $1,
+      beschrijving = $2,
+      organisatie = $3,
+      github = $4,
+      demo = $5,
+      technologieen = $6,
+      afbeelding = $7,
+      type = $8
+     WHERE id = $9`,
+    [naam, beschrijving, organisatie, github, demo, technologieen, afbeelding, type, id]
+  );
+
+  res.json({ id, message: "Project updated" });
+});
+
+
+// DELETE پروژه
 app.delete("/projects/:id", async (req, res) => {
   const { id } = req.params;
   await pool.query("DELETE FROM projects WHERE id = $1", [id]);
   res.status(204).send();
 });
 
-
-// Start Server
+// شروع سرور
 app.listen(PORT, async () => {
   await initDb();
   console.log(`🚀 Server running at http://localhost:${PORT}`);
