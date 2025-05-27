@@ -6,12 +6,15 @@ import cors from "cors";
 import { nanoid } from "nanoid";
 import pkg from "pg";
 import process from 'process';
+import fileUpload from "express-fileupload";
+import path from "path";
 
 const { Pool } = pkg;
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Database connection
 const pool = new Pool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -21,9 +24,13 @@ const pool = new Pool({
   ssl: { rejectUnauthorized: false }
 });
 
+// Middlewares
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); // for JSON requests
+app.use(fileUpload());   // for multipart/form-data (file uploads)
+app.use("/uploads", express.static("uploads")); // serve uploaded images
 
+// DB table
 const initDb = async () => {
   await pool.query(`
     CREATE TABLE IF NOT EXISTS projects (
@@ -40,44 +47,78 @@ const initDb = async () => {
   `);
 };
 
-// GET همه پروژه‌ها
+// GET all projects
 app.get("/projects", async (req, res) => {
   const result = await pool.query("SELECT * FROM projects");
 
   const complete = result.rows.map(p => ({
     ...p,
-    type: p.type || "persoonlijk"  // اگر type وجود نداشت، پیش‌فرض بده
+    type: p.type || "persoonlijk"
   }));
 
   res.json(complete);
 });
 
-// POST پروژه جدید
+// POST new project
 app.post("/projects", async (req, res) => {
-  const newProject = {
-    id: nanoid(),
-    ...req.body,
-    type: req.body.type || "persoonlijk"
-  };
+  try {
+    const {
+      naam,
+      beschrijving,
+      organisatie,
+      github,
+      demo,
+      technologieen,
+      type
+    } = req.body;
 
-  const { id, naam, beschrijving, organisatie, github, demo, technologieen, afbeelding, type } = newProject;
+    const techArray = technologieen.split(",").map(t => t.trim());
+    const afbeeldingen = [];
 
-  await pool.query(
-    `INSERT INTO projects (id, naam, beschrijving, organisatie, github, demo, technologieen, afbeelding, type)
-     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
-    [id, naam, beschrijving, organisatie, github, demo, technologieen, afbeelding, type]
-  );
+    // Process uploaded image (optional)
+    if (req.files?.afbeelding) {
+      const file = req.files.afbeelding;
+      const safeFileName = `${Date.now()}-${file.name}`;
+      const uploadPath = path.join("uploads", safeFileName);
 
-  res.status(201).json(newProject);
+      await file.mv(uploadPath);
+      afbeeldingen.push(`/uploads/${safeFileName}`);
+    }
+
+    const id = nanoid();
+
+    await pool.query(`
+      INSERT INTO projects (id, naam, beschrijving, organisatie, github, demo, technologieen, afbeelding, type)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    `, [id, naam, beschrijving, organisatie, github, demo, techArray, afbeeldingen, type]);
+
+    res.status(201).json({
+      id,
+      naam,
+      beschrijving,
+      organisatie,
+      github,
+      demo,
+      technologieen: techArray,
+      afbeelding: afbeeldingen,
+      type
+    });
+  } catch (err) {
+    console.error("❌ Server Error:", err);
+    res.status(500).send("Serverfout");
+  }
 });
 
-// PUT پروژه
+// PUT update project
 app.put("/projects/:id", async (req, res) => {
   const { id } = req.params;
-  const { naam, beschrijving, organisatie, github, demo, technologieen, afbeelding, type } = req.body;
+  const {
+    naam, beschrijving, organisatie, github,
+    demo, technologieen, afbeelding, type
+  } = req.body;
 
-  await pool.query(
-    `UPDATE projects SET
+  await pool.query(`
+    UPDATE projects SET
       naam = $1,
       beschrijving = $2,
       organisatie = $3,
@@ -86,22 +127,20 @@ app.put("/projects/:id", async (req, res) => {
       technologieen = $6,
       afbeelding = $7,
       type = $8
-     WHERE id = $9`,
-    [naam, beschrijving, organisatie, github, demo, technologieen, afbeelding, type, id]
-  );
+    WHERE id = $9
+  `, [naam, beschrijving, organisatie, github, demo, technologieen, afbeelding, type, id]);
 
-  res.json({ id, message: "Project updated" });
+  res.json({ message: "Project updated", id });
 });
 
-
-// DELETE پروژه
+// DELETE project
 app.delete("/projects/:id", async (req, res) => {
   const { id } = req.params;
   await pool.query("DELETE FROM projects WHERE id = $1", [id]);
   res.status(204).send();
 });
 
-// شروع سرور
+// Start
 app.listen(PORT, async () => {
   await initDb();
   console.log(`🚀 Server running at http://localhost:${PORT}`);

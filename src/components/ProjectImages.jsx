@@ -6,6 +6,7 @@ import bc2 from "../assets/image/bc-2.png";
 import bc3 from "../assets/image/bc-3.png";
 import bc4 from "../assets/image/bc-4.png";
 import weatherApi from "../assets/image/weather-api.png";
+import productList from "../assets/image/product-list.png";
 
 
 const imageMap = {
@@ -17,6 +18,7 @@ const imageMap = {
   "bc-3.png": bc3,
   "bc-4.png": bc4,
   "weather-api.png": weatherApi,
+  "product-list.png" : productList,
 };
 
 export function resolveImagePath(fileName) {

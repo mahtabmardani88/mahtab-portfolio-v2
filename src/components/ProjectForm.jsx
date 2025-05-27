@@ -33,7 +33,9 @@ console.log("Submitting...");
     formDataToSend.append("github", formData.github);
     formDataToSend.append("demo", formData.demo);
     formDataToSend.append("type", formData.type);
-    formDataToSend.append("technologieen", formData.technologieen);
+   formDataToSend.append("technologieen", JSON.stringify(
+  formData.technologieen.split(",").map(t => t.trim())
+));
 
     if (formData.afbeelding) {
       formDataToSend.append("afbeelding", formData.afbeelding);
@@ -44,10 +46,12 @@ console.log("Submitting...");
       body: formDataToSend,
     });
 
-    const result = await res.json();
-    onAdd(result);
+ const result = await res.json();
 
-    // فرم رو ریست کن
+if (result && result.naam) {
+  onAdd(result);
+}
+
     setFormData({
       naam: "",
       beschrijving: "",
@@ -94,11 +98,11 @@ console.log("Submitting...");
 
       <label>
         Type project
-        <select name="type" value={formData.type} onChange={handleChange}>
-          <option value="">Selecteer type</option>
-          <option value="persoonlijk">Persoonlijk project</option>
-          <option value="groeps">Groepsproject</option>
-        </select>
+        <select name="type" value={formData.type} onChange={handleChange} required>
+  <option value="">Selecteer type</option>
+  <option value="persoonlijk">Persoonlijk project</option>
+  <option value="groeps">Groepsproject</option>
+</select>
       </label>
 
       <label>

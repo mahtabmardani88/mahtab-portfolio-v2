@@ -79,6 +79,15 @@
   "demo": "",
   "technologieen": ["Java", "Spring Boot", "Thymeleaf", "MySQL"],
   "afbeelding": []
+},
+{
+  "naam": "product list",
+  "beschrijving": "persoonlijk project van HYF",
+  "organisatie": "HackYourFuture",
+  "github": "https://github.com/mahtabmardani88/React-Cohort48.git",
+  "demo": "https://iridescent-sherbet-8bda94.netlify.app/",
+  "technologieen": ["java script", "use API"],
+  "afbeelding": ["/src/assets/image/product-list.png"],
+  "type": "persoonlijk"
 }
-
   ]
