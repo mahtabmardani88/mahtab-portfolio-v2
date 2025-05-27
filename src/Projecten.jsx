@@ -104,7 +104,7 @@ export default function Projecten({ projecten = [], onAddProject }) {
         <ProjectForm
           onAdd={(newProj) => {
             onAddProject(newProj);
-            setToonFormulier(false); // بستن بعد از ذخیره
+            setToonFormulier(false);
           }}
         />
       </Modal>
