@@ -20,9 +20,14 @@ const pool = new Pool({
   ssl: { rejectUnauthorized: false }
 });
 
-app.use(cors({
-  origin: "https://lively-kataifi-0399ae.netlify.app"
-}));
+// app.use(cors({
+//   origin: [
+//     "https://lively-kataifi-0399ae.netlify.app",
+//     "http://localhost:5174"
+//   ]
+// }));
+app.use(cors());
+
 
 app.use(express.json());
 

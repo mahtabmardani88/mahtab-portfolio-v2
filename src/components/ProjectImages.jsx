@@ -5,6 +5,7 @@ import bc1 from "../assets/image/bc-1.png";
 import bc2 from "../assets/image/bc-2.png";
 import bc3 from "../assets/image/bc-3.png";
 import bc4 from "../assets/image/bc-4.png";
+import weatherApi from "../assets/image/weather-api.png";
 
 
 const imageMap = {
@@ -14,7 +15,8 @@ const imageMap = {
   "bc-1.png": bc1,
   "bc-2.png": bc2,
   "bc-3.png": bc3,
-  "bc-4.png": bc4
+  "bc-4.png": bc4,
+  "weather-api.png": weatherApi,
 };
 
 export function resolveImagePath(fileName) {
