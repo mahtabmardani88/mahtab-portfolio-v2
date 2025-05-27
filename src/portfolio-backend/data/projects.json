@@ -19,8 +19,8 @@
        {
       "naam": "Weather API",
       "type": "persoonlijk",
-      "beschrijving": "Deze applicatie is gebouwd met JavaScript en maakt gebruik van een externe API om actuele weersinformatie weer te geven. Je kunt het weer opzoeken op basis van de naam van een land of stad. De data wordt opgehaald via de Google Weather API.
-Een eenvoudig, interactief project waarin ik heb gewerkt met fetch-aanvragen, DOM-manipulatie en API-integratie.",
+"beschrijving": "Deze applicatie is gebouwd met JavaScript en maakt gebruik van een externe API om actuele weersinformatie weer te geven. Je kunt het weer opzoeken op basis van de naam van een land of stad. De data wordt opgehaald via de Google Weather API. Een eenvoudig, interactief project waarin ik heb gewerkt met fetch-aanvragen, DOM-manipulatie en API-integratie.",
+
       "organisatie": "HackYourFuture",
       "github": "https://github.com/mahtabmardani88/Weather-usingApi.git",
       "demo": "https://weather-usingapi.netlify.app/",
