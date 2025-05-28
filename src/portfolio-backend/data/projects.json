@@ -89,5 +89,18 @@
   "technologieen": ["java script", "use API"],
   "afbeelding": ["/src/assets/image/product-list.png"],
   "type": "persoonlijk"
+},
+{
+  "naam": "My Food App",
+  "beschrijving": "Een persoonlijke React-opdracht gemaakt tijdens HackYourFuture",
+  "organisatie": "HackYourFuture",
+  "github": "https://github.com/mahtabmardani88/React-Cohort48.git",
+  "demo": "https://lively-dodol-c98796.netlify.app/",
+  "technologieen": ["React"," REST API"],
+    "afbeelding": [
+        "/src/assets/image/food-fav-react (1).png",
+        "/src/assets/image/food-fav-react (2).png"
+      ],
+  "type": "persoonlijk"
 }
   ]

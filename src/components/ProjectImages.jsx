@@ -7,7 +7,8 @@ import bc3 from "../assets/image/bc-3.png";
 import bc4 from "../assets/image/bc-4.png";
 import weatherApi from "../assets/image/weather-api.png";
 import productList from "../assets/image/product-list.png";
-
+import myFoodApp1 from "/src/assets/image/food-fav-react (1).png";
+import myFoodApp2 from "/src/assets/image/food-fav-react (2).png";
 
 const imageMap = {
   "countries-api.png": countriesInfoImage,
@@ -19,6 +20,8 @@ const imageMap = {
   "bc-4.png": bc4,
   "weather-api.png": weatherApi,
   "product-list.png" : productList,
+  "food-fav-react (1).png" :myFoodApp1,
+  "food-fav-react (2).png": myFoodApp2
 };
 
 export function resolveImagePath(fileName) {
