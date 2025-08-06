@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { supabase } from "../portfolio-backend/supabaseClient";
 
 export default function ProjectForm({ onAdd }) {
   const [formData, setFormData] = useState({
@@ -8,50 +9,49 @@ export default function ProjectForm({ onAdd }) {
     github: "",
     demo: "",
     technologieen: "",
-    afbeelding: null,
+    afbeelding: "",
     type: ""
   });
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (name === "afbeelding") {
-      setFormData((prev) => ({ ...prev, afbeelding: files[0] }));
-    } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
-    }
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-console.log("Submitting...");
+    console.log("Submitting to Supabase...");
 
+    // تکنولوژی‌ها رو به آرایه تبدیل می‌کنیم
+    const techArray = formData.technologieen
+      ? formData.technologieen.split(",").map((t) => t.trim())
+      : [];
 
-    const formDataToSend = new FormData();
-    formDataToSend.append("naam", formData.naam);
-    formDataToSend.append("beschrijving", formData.beschrijving);
-    formDataToSend.append("organisatie", formData.organisatie);
-    formDataToSend.append("github", formData.github);
-    formDataToSend.append("demo", formData.demo);
-    formDataToSend.append("type", formData.type);
-   formDataToSend.append("technologieen", JSON.stringify(
-  formData.technologieen.split(",").map(t => t.trim())
-));
+    // داده برای درج
+    const newProject = {
+      naam: formData.naam,
+      beschrijving: formData.beschrijving,
+      organisatie: formData.organisatie,
+      github: formData.github,
+      demo: formData.demo,
+      technologieen: techArray,
+      afbeelding: formData.afbeelding ? [formData.afbeelding] : [],
+      type: formData.type,
+    };
 
-    if (formData.afbeelding) {
-      formDataToSend.append("afbeelding", formData.afbeelding);
+    const { data, error } = await supabase
+      .from("projects")
+      .insert([newProject])
+      .select();
+
+    if (error) {
+      console.error("❌ Error inserting project:", error);
+    } else {
+      console.log("✅ Inserted:", data);
+      onAdd(data[0]);
     }
 
-    const res = await fetch("https://mahtab-portfolio-v2.onrender.com/projects", {
-      method: "POST",
-      body: formDataToSend,
-    });
-
- const result = await res.json();
-
-if (result && result.naam) {
-  onAdd(result);
-}
-
+    // فرم ریست
     setFormData({
       naam: "",
       beschrijving: "",
@@ -59,7 +59,7 @@ if (result && result.naam) {
       github: "",
       demo: "",
       technologieen: "",
-      afbeelding: null,
+      afbeelding: "",
       type: ""
     });
   };
@@ -99,15 +99,15 @@ if (result && result.naam) {
       <label>
         Type project
         <select name="type" value={formData.type} onChange={handleChange} required>
-  <option value="">Selecteer type</option>
-  <option value="persoonlijk">Persoonlijk project</option>
-  <option value="groeps">Groepsproject</option>
-</select>
+          <option value="">Selecteer type</option>
+          <option value="persoonlijk">Persoonlijk project</option>
+          <option value="groeps">Groepsproject</option>
+        </select>
       </label>
 
       <label>
-        Afbeelding uploaden
-        <input name="afbeelding" type="file" accept="image/*" onChange={handleChange} />
+        Afbeelding (naam bestand bv: countries-api.png)
+        <input name="afbeelding" value={formData.afbeelding} onChange={handleChange} />
       </label>
 
       <button type="submit">Project toevoegen</button>
